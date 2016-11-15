@@ -8,6 +8,35 @@ uSwitchPlayer(Player, NextPlayer):-
         Player==2 -> NextPlayer is 1
     ).
 
+uChangeElem([_|Xs], 0, Elem, [Elem|Xs]).
+uChangeElem([X|Xs], Index, Elem, [X|Ys]):-
+    NextIndex is Index - 1,
+    uChangeElem(Xs, NextIndex, Elem, Ys).
+
+uChangeElem([X|Xs], ColumnIndex, 0, Elem, [Y|Xs]) :-
+    uChangeElem(X, ColumnIndex, Elem, Y).
+uChangeElem([X|Xs], ColumnIndex, RowIndex, Elem, [X|Ys]) :-
+    NextIndex is RowIndex - 1,
+    uChangeElem(Xs, ColumnIndex, NextIndex, Elem, Ys).
+
+
+uGetIndexElem([X|_], 0, X).
+uGetIndexElem([_|Xs], Index, Elem):-
+   NewIndex is Index - 1,
+   uGetIndexElem(Xs, NewIndex, Elem).
+
+uGetIndexElem(Array2D, ColumnIndex, RowIndex, Elem) :-
+    CIndex is ColumnIndex,
+    RIndex is RowIndex,
+    uGetIndexElem(Array2D, RIndex, Row),
+    uGetIndexElem(Row, CIndex, Result),
+    %write('ELEM'), write(Row), nl,
+    (
+        Result == 0 -> Elem = 0,!;
+        Result == 1 -> Elem = 1,!;
+        Result == 2 -> Elem = 2,!
+    ).
+
 uTranslateColumn('A', 0).
 uTranslateColumn('B', 1).
 uTranslateColumn('C', 2).

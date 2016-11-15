@@ -4,14 +4,22 @@ start :-
     dmShowHeader,
     dmShowMainMenu.
 
-/* Game flow predicates */
+test :- 
+    initialize(Board),
+    write('starting'), nl,
+    /*plSinglePiece(Board, 1, 4, 2, Plays),
+    nl,nl,write(Plays),nl,nl.*/
+    plHOrdo(Board, 1, )
 
+/* Game flow predicates */
 play :-
     initialize(Board),
+
     write('Enter Player 1 name (lowercase): '),
     read(Player1), nl,
     write('Enter Player 2 name (lowercase): '),
     read(Player2), nl,
+    
     Player is 1,
     play(Board, Player, Player1, Player2).
 

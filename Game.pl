@@ -9,7 +9,9 @@ test :-
     write('starting'), nl,
     /*plSinglePiece(Board, 1, 4, 2, Plays),
     nl,nl,write(Plays),nl,nl.*/
-    plHOrdo(Board, 1, )
+    %plHOrdo(Board, 1, )
+    plPlaysList(Board, 1, List),
+    write(List).
 
 /* Game flow predicates */
 play :-

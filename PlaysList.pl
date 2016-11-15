@@ -4,15 +4,24 @@
  * Board, Player, PieceCoords (X, Y);
  * Returns List with the possible moves
  */
-plSinglePiece(Board, Identifier, X, Y, List) :-
-    (
-        Identifier == 1 -> EnemyId is 2;
-        Identifier == 2 -> EnemyId is 1;
-        fail
-    ),
-    % Checks if current piece is from the player
-    uGetIndexElem(Board, X, Y, Identifier),
+plPlaysList(Board, Player, List) :-
+    plSinglePiecePlaysList(Board, Player, 0, 0, [], List).
 
+% Gets all possible plays for every single piece from the player(Player)
+plSinglePiecePlaysList(Board, Player, _, 8, CurrentList, CurrentList).
+plSinglePiecePlaysList(Board, Player, 9, Y, CurrentList, FinalList) :-
+    NextY is Y + 1,
+    plSinglePiece(Board, Player, 9, Y, CurrentList, NextList),
+    plSinglePiecePlaysList(Board, Player, 0, NextY, NextList, FinalList).
+plSinglePiecePlaysList(Board, Player, X, Y, CurrentList, FinalList) :-
+    NextX is X + 1,
+    plSinglePiece(Board, Player, X, Y, CurrentList, NextList),
+    plSinglePiecePlaysList(Board, Player, NextX, Y, NextList, FinalList).
+
+% Gets all possible plays for a single piece
+plSinglePiece(Board, Identifier, X, Y, PreviousList, List) :-
+    % Checks if current piece is from the player
+    \+ uGetIndexElem(Board, X, Y, Identifier), List = PreviousList;
     % Places an invalid element in the X Y pos so it won't be considered
     uChangeElem(Board, X, Y, -1, TmpBoard),
     
@@ -23,7 +32,7 @@ plSinglePiece(Board, Identifier, X, Y, List) :-
     DownY is Y+1,
 
     % Plays to the left    
-    plSinglePieceLeft(TmpBoard, Identifier, X, Y, LeftX, Y, [], Result),
+    plSinglePieceLeft(TmpBoard, Identifier, X, Y, LeftX, Y, PreviousList, Result),
     
     % Plays to the right
     plSinglePieceRight(TmpBoard, Identifier, X, Y, RightX, Y, Result, Result2),

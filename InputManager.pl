@@ -3,23 +3,25 @@ imMenu :-
     (   
         Opt==1 -> play;
         Opt==2 -> dmShowRules, dmShowMainMenu;
-        Opt==3 -> uQuit
+        Opt==3 -> uQuit;
+        dmInvalidMove, fail
     ). 
 
 imSelectPlay :-
-    read(Opt),
+    nl, nl, read(Opt), nl, nl,
     (
         Opt==1 -> imPlaySinglePiece;
         Opt==2 -> imPlayHorzOrdo;
         Opt==3 -> imPlayVertOrdo;
-        Opt==0 -> uQuit
+        Opt==0 -> uQuit;
+        dmInvalidMove, fail
     ).
 
 imPlaySinglePiece :-
-    write('Play Single').
+    dmShowMoveSinglePiece.
 
 imPlayHorzOrdo :-
-    write('Play Horz').
+    write('Not yet implemented!'), nl, fail.
 
 imPlayVertOrdo :-
-    write('Play Vert').
+    write('Not yet implemented!'), nl, fail.

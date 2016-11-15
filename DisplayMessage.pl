@@ -30,6 +30,14 @@ dmShowMoveCommands :-
     write('3. Move a vertical ordo.'), nl, 
     write('0. Quit').
 
+dmShowMoveSinglePiece :-
+    write('1. See a list of all possible plays.'), nl,
+    write('2. Enter the coordinates.'), nl,
+    write('0. Quit').
+
+dmInvalidMove :-
+    write('Invalid move, please try again!'), nl, nl.
+
 /*dmShowMoveCommands :-
     write('1. movePiece(Xi, Yi, Xf, Yf)." to move a single piece.'), nl,
     write('Use "moveHorzOrdo(XiLeft, XiRight, Yi, Yf)." to move a horizontal ordo.'), nl,

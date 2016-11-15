@@ -4,11 +4,12 @@
  * Board, Player, PieceCoords (X, Y);
  * Returns List with the possible moves
  */
+ % Gets all possible plays for the player(Player)
 plPlaysList(Board, Player, List) :-
     plSinglePiecePlaysList(Board, Player, 0, 0, [], List).
 
 % Gets all possible plays for every single piece from the player(Player)
-plSinglePiecePlaysList(Board, Player, _, 8, CurrentList, CurrentList).
+plSinglePiecePlaysList(_, _, _, 8, CurrentList, CurrentList).
 plSinglePiecePlaysList(Board, Player, 9, Y, CurrentList, FinalList) :-
     NextY is Y + 1,
     plSinglePiece(Board, Player, 9, Y, CurrentList, NextList),

@@ -231,10 +231,6 @@ plHOrdoUp(Board, Identifier, XOrigin1, XOrigin2, YOrigin, Y, List, Result) :-
     );
     Result = List.
 
-
-
-
-
 plCheckHOrdoSpace(Board, X1, X2, Y) :-
     X1 > X2, true;
     plCheckOrdoSpace(Board, X1, Y),

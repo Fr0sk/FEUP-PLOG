@@ -6,9 +6,11 @@ dmShowHeader :-
     nl, nl.
 
 dmShowMainMenu :- 
-    write('1. Start Game'),nl,
-    write('2. View game rules'),nl,
-    write('3. Quit game'),nl, nl, imMenu.
+    write('1. Player vs Player'),nl,
+    write('2. Player vs Computer'),nl,
+    write('3. Computer vs Computer'),nl,
+    write('3. View game rules'),nl,
+    write('0. Quit game'),nl, nl, imMenu.
 
 dmShowRules:-
     nl, nl,
@@ -38,7 +40,30 @@ dmShowMoveSinglePiece :-
 dmInvalidMove :-
     write('Invalid move, please try again!'), nl, nl.
 
-/*dmShowMoveCommands :-
-    write('1. movePiece(Xi, Yi, Xf, Yf)." to move a single piece.'), nl,
-    write('Use "moveHorzOrdo(XiLeft, XiRight, Yi, Yf)." to move a horizontal ordo.'), nl,
-    write('Use "moveVertOrdo(Xi, YiTop, YiBot, Xf)." to move a vertical ordo.'), nl.*/
+dmDisplayPlaysList(List) :-
+    uCount(List, 0, Num) ->
+    write('Plays List:'),nl ->
+    dmDisplayPlaysListMove(List, 0, Num).    
+
+dmDisplayPlaysListMove(List, Offset, Max) :-
+    Offset == Max, true;
+    (
+        uGetIndexElem(List, Offset, Move),
+        uGetIndexElem(Move, 2, FromX),
+        uGetIndexElem(Move, 3, FromY),
+        uGetIndexElem(Move, 4, ToX),
+        uGetIndexElem(Move, 5, ToY),
+        
+        uTranslateColumn(FromXT, FromX),
+        uTranslateRow(FromYT, FromY),
+        uTranslateColumn(ToXT, ToX),
+        uTranslateRow(ToYT, ToY),
+        NextOffset is Offset + 1,
+        write(Offset), 
+        write('. From('),
+        write(FromXT), write(','), write(FromYT),
+        write('), To('),
+        write(ToXT), write(','), write(ToYT),
+        write(')'), nl,
+        dmDisplayPlaysListMove(List, NextOffset, Max)
+    ).

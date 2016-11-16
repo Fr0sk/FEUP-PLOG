@@ -37,6 +37,16 @@ uGetIndexElem(Array2D, ColumnIndex, RowIndex, Elem) :-
         Result == 2 -> Elem = 2,!
     ).
 
+uCount([], Count, Count).
+uCount([_|Xs], Offset, Count) :-
+    NextOffset is Offset + 1,
+    uCount(Xs, NextOffset, Count).
+
+uExist(Elem, Elem).
+uExist([X|Xs], Elem) :-
+    X = Elem;
+    uExist(Xs, Elem).
+
 uTranslateColumn('A', 0).
 uTranslateColumn('B', 1).
 uTranslateColumn('C', 2).
@@ -57,3 +67,11 @@ uTranslateColumn('g', 6).
 uTranslateColumn('h', 7).
 uTranslateColumn('i', 8).
 uTranslateColumn('j', 9).
+uTranslateRow(1,0).
+uTranslateRow(2,1).
+uTranslateRow(3,2).
+uTranslateRow(4,3).
+uTranslateRow(5,4).
+uTranslateRow(6,5).
+uTranslateRow(7,6).
+uTranslateRow(8,7).

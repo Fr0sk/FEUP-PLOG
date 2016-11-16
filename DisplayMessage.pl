@@ -9,14 +9,13 @@ dmShowMainMenu :-
     write('1. Player vs Player'),nl,
     write('2. Player vs Computer'),nl,
     write('3. Computer vs Computer'),nl,
-    write('3. View game rules'),nl,
+    write('4. View game rules'),nl,
     write('0. Quit game'),nl, nl, imMenu.
 
 dmShowRules:-
     nl, nl,
     write('To view the full game rules navigate to: '), nl,
-    write('https://spielstein.com/games/ordo/rules/official'), nl,
-    write('Write "menu." to go to the main menu'), nl, nl.
+    write('https://spielstein.com/games/ordo/rules/official'), nl, nl.
 
 dmShowPlayInfo(Board, PlayerName, Piece) :-
     nl, nl, dbDrawBoard(Board), nl, nl,

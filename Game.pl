@@ -1,3 +1,4 @@
+:-use_module(library(random)).
 :-['Boards', 'DisplayBoard', 'DisplayMessage', 'InputManager', 'PlaysList', 'Rules', 'Utils'].
 
 test :-

@@ -1,3 +1,5 @@
+/* Pieces and bits of code that haven't worked */
+
 restrictLimits(N, _) :- N =< 4.
 restrictLimits(N, Vars) :-
     N > 4,
